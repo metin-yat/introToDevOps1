@@ -1,11 +1,9 @@
 name: CI
 
-# Trigger the workflow only when changes are pushed to index.html on the main branch.
+# Trigger the workflow on every push to the main branch and allow manual triggering
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'index.html'
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
