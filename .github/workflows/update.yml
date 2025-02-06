@@ -1,0 +1,28 @@
+name: CI
+
+# Trigger the workflow only when changes are pushed to index.html on the main branch.
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'index.html'
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  build:
+    # Use your self-hosted runner
+    runs-on: self-hosted
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      # Check out your repository so the runner can access your files.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages # Artifact name
+          path: . # Path to the files to upload
